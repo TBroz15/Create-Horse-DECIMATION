@@ -1,0 +1,7 @@
+{
+  "selector": "create_horse_decimation:horse_block",
+
+  "properties": {
+    "sable:friction": 0.05
+  }
+}

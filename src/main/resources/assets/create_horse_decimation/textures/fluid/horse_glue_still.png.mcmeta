@@ -1,0 +1,8 @@
+{
+  "animation": {
+    "frametime": 1
+  },
+  "texture": {
+    "force_translucent": true
+  }
+}

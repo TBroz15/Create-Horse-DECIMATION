@@ -1,0 +1,23 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "create_horse_decimation:horse_block"
+    }
+  ],
+  "processing_time": 260,
+  "results": [
+    {
+      "count": 10,
+      "id": "create_horse_decimation:horse_dust"
+    },
+    {
+      "id": "create:experience_block"
+    },
+    {
+      "chance": 0.5,
+      "count": 3,
+      "id": "create_horse_decimation:horse_dust"
+    }
+  ]
+}

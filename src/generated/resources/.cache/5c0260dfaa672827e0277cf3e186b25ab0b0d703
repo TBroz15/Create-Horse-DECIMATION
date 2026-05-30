@@ -1,0 +1,22 @@
+// 1.21.1	2026-05-29T22:40:26.1817356	Registrate Provider for create_horse_decimation [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+8da6336d161252190baa8ed99cbee86f895fc462 assets/create_horse_decimation/blockstates/horse_abductor.json
+f75e5d280ee190d80338b8444d8716d761da4e16 assets/create_horse_decimation/blockstates/horse_block.json
+e99b16a01c2bc50ab9f97b3623d15bff69d7f440 assets/create_horse_decimation/blockstates/horse_glue.json
+3bedaa3dbb857738f5f50afee3b4e54c328193a4 assets/create_horse_decimation/lang/en_ud.json
+cf922a822d7e10715f8a2169a1a3faf79b1eee9f assets/create_horse_decimation/lang/en_us.json
+2dcb68271b5d4d18eb3c6e0ddd0897218459321c assets/create_horse_decimation/models/block/horse_glue.json
+0e21bd7da4555f3aa6205c61abe892bf50f92938 assets/create_horse_decimation/models/item/horse_abductor.json
+6846226e65cdac704425a6f44a2b5d4cab41cf00 assets/create_horse_decimation/models/item/horse_block.json
+028c1b517e71a23e236d41ff47eeecf6679464b2 assets/create_horse_decimation/models/item/horse_dust.json
+62048a03d54e3bbfde71a458e21fb897292a8dd1 assets/create_horse_decimation/models/item/horse_glue_ball.json
+160f9e25a1cc66e143de6e86d274d339d540860b assets/create_horse_decimation/models/item/horse_glue_bucket.json
+6347925a4ab3982bc89ff4dcd2376383855083e9 assets/create_horse_decimation/models/item/horse_jpg.json
+d27a7c7000ff575aeb4c6e70aa4dfd5cd949960f data/create_horse_decimation/loot_table/blocks/horse_abductor.json
+ece32afafa59b6fdbac2b4a9f52bf53b3fbc4877 data/create_horse_decimation/loot_table/blocks/horse_block.json
+96751644e392a28c873c195f2d5271d7eb1a4097 data/c/tags/block/storage_blocks.json
+ed45d9e31a5db6de2894e3a6da1d429962636015 data/c/tags/item/foods.json
+a70a7e5389aa593d4ceadb6b52c05e58439bd130 data/c/tags/item/slime_balls.json
+96751644e392a28c873c195f2d5271d7eb1a4097 data/c/tags/item/storage_blocks.json
+96751644e392a28c873c195f2d5271d7eb1a4097 data/minecraft/tags/block/beacon_base_blocks.json
+6b82fb54e60dfa7860684aa77bb865fdbe72ade4 data/minecraft/tags/block/mineable/axe.json
+6b82fb54e60dfa7860684aa77bb865fdbe72ade4 data/minecraft/tags/block/mineable/pickaxe.json

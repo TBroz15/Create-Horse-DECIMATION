@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "create_horse_decimation:block/horse_glue"
+    }
+  }
+}

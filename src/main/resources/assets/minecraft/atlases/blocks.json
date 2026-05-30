@@ -1,0 +1,12 @@
+{
+  "sources": [
+    {
+      "type": "single",
+      "resource": "create_horse_decimation:fluid/horse_glue_flow"
+    },
+    {
+      "type": "single",
+      "resource": "create_horse_decimation:fluid/horse_glue_still"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "damage": 5,
+  "items": "create_horse_decimation:horse_glue_ball",
+  "knockback": 1.5,
+  "on_entity_hit": {
+    "type": "create:potion_effect",
+    "effect": "minecraft:slowness",
+    "level": 10,
+    "recoverable": true,
+    "ticks": 160
+  },
+  "render_mode": {
+    "type": "create:tumble"
+  },
+  "velocity_multiplier": 1.25
+}

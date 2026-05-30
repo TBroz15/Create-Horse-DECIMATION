@@ -1,0 +1,17 @@
+{
+  "sniffy_sniffa": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.fox.sniff",
+        "type": "event",
+        "volume": 2,
+        "pitch": 1.3
+      }
+    ]
+  },
+  "horse_note": {
+    "sounds": [
+      "mob/horse/hit2"
+    ]
+  }
+}
