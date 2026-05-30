@@ -5,7 +5,7 @@
     <br>
 </h1>
 
-A joke Create Addon that lets you (half-ethically) process Horses into many horse related stuff! 
+A joke Create Addon that lets you (half-ethically) process Horses into horse related stuff! 
 
 
 ### "Why decimate horses exactly?"
