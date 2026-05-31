@@ -35,7 +35,6 @@ import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @EventBusSubscriber(modid = CreateHorseDecimation.MOD_ID)

@@ -21,6 +21,8 @@ public class MechanicalPressBlockEntityMixin {
         var level = self.blockEntity.getLevel();
         var pos = self.getPos();
 
+        if (level == null) return;
+
         BlockEntity blockEntity = level.getBlockEntity(pos.below(2));
         if (blockEntity == null) return;
         if (!(blockEntity instanceof BasinBlockEntity basin)) return;
