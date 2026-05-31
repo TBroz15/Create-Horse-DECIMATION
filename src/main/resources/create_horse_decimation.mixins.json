@@ -5,6 +5,7 @@
   "plugin": "dev.tuxebro.create_horse_decimation.ModMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "BasinInventoryMixin",
     "CrushingWheelControllerBlockEntityMixin",
     "DetectHorseBlockDestroyMixin",
     "MechanicalPressBlockEntityMixin"
