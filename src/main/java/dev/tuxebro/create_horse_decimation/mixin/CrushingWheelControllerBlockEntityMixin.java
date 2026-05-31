@@ -21,7 +21,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = CrushingWheelControllerBlockEntity.class, remap = false)
@@ -43,8 +42,19 @@ public abstract class CrushingWheelControllerBlockEntityMixin {
     // dear developers of create who made the crushing wheel, more specifically the tick method
     // PLEASE SPLIT YOUR CODE AND STOP NESTING IF STATEMENTS
     // https://media.tenor.com/zrEcHfcgTNQAAAAe/alpha-wolf-alpha.png
+
     @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/processing/recipe/ProcessingInventory;getStackInSlot(I)Lnet/minecraft/world/item/ItemStack;", ordinal = 3))
-    private ItemStack amongUs(ProcessingInventory instance, int i, Operation<ItemStack> original) {
+    private ItemStack onEjectOutputItem(ProcessingInventory instance, int i, Operation<ItemStack> original) {
+        var outputStack = original.call(instance, i);
+        if (outputStack.isEmpty()) return ItemStack.EMPTY;
+
+        onItemCrush(outputStack);
+
+        return outputStack;
+    }
+
+    @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/processing/recipe/ProcessingInventory;getStackInSlot(I)Lnet/minecraft/world/item/ItemStack;", ordinal = 2))
+    private ItemStack onAddingOutputItemOnBelt(ProcessingInventory instance, int i, Operation<ItemStack> original) {
         var outputStack = original.call(instance, i);
         if (outputStack.isEmpty()) return ItemStack.EMPTY;
 
