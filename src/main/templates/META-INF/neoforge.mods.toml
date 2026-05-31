@@ -68,6 +68,6 @@ reason="its called \"CREATE: Horse Decimation\" for a reason"
 
 [[dependencies."${mod_id}"]]
 modId="sable"
-type="required"
+type="optional"
 ordering="AFTER"
 side="BOTH"
