@@ -17,6 +17,7 @@ public class ModItems {
 
     public static final ItemEntry<HorseDustItem> HORSE_DUST = REGISTRATE.item("horse_dust", HorseDustItem::new)
             .tag(Tags.Items.FOODS)
+            .burnTime(4_000)
             .register();
 
     public static final ItemEntry<HorseJpgItem> HORSE_JPG = REGISTRATE.item("horse_jpg", HorseJpgItem::new)
