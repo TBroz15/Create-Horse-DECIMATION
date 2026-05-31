@@ -135,12 +135,12 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
 
     public static float getPullScale(int range) {
         if (range <= 15)
-            return 1f/32f;
+            return 1f/24f;
 
         if (range <= 30)
-            return 1f/64f;
+            return 1f/48f;
 
-        return 1f / 128f;
+        return 1f / 96f;
     }
 
     @OnlyIn(Dist.CLIENT)
