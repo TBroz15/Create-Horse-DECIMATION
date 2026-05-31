@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-29T22:40:26.1817356	Registrate Provider for create_horse_decimation [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+// 1.21.1	2026-05-31T17:11:23.352105	Registrate Provider for create_horse_decimation [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
 8da6336d161252190baa8ed99cbee86f895fc462 assets/create_horse_decimation/blockstates/horse_abductor.json
 f75e5d280ee190d80338b8444d8716d761da4e16 assets/create_horse_decimation/blockstates/horse_block.json
 e99b16a01c2bc50ab9f97b3623d15bff69d7f440 assets/create_horse_decimation/blockstates/horse_glue.json
@@ -20,3 +20,4 @@ a70a7e5389aa593d4ceadb6b52c05e58439bd130 data/c/tags/item/slime_balls.json
 96751644e392a28c873c195f2d5271d7eb1a4097 data/minecraft/tags/block/beacon_base_blocks.json
 6b82fb54e60dfa7860684aa77bb865fdbe72ade4 data/minecraft/tags/block/mineable/axe.json
 6b82fb54e60dfa7860684aa77bb865fdbe72ade4 data/minecraft/tags/block/mineable/pickaxe.json
+d8720596da227edcaa8e1c19d3e3ad4e985bad54 data/neoforge/data_maps/item/furnace_fuels.json
