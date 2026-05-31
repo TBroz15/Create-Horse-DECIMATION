@@ -1,5 +1,7 @@
 package dev.tuxebro.create_horse_decimation.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.simibubi.create.content.kinetics.crusher.CrushingWheelControllerBlockEntity;
 import com.simibubi.create.content.processing.recipe.ProcessingInventory;
 import dev.tuxebro.create_horse_decimation.ModItems;
@@ -41,9 +43,9 @@ public abstract class CrushingWheelControllerBlockEntityMixin {
     // dear developers of create who made the crushing wheel, more specifically the tick method
     // PLEASE SPLIT YOUR CODE AND STOP NESTING IF STATEMENTS
     // https://media.tenor.com/zrEcHfcgTNQAAAAe/alpha-wolf-alpha.png
-    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/processing/recipe/ProcessingInventory;getStackInSlot(I)Lnet/minecraft/world/item/ItemStack;", ordinal = 3))
-    private ItemStack amongUs(ProcessingInventory instance, int i) {
-        var outputStack = instance.getStackInSlot(i);
+    @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/processing/recipe/ProcessingInventory;getStackInSlot(I)Lnet/minecraft/world/item/ItemStack;", ordinal = 3))
+    private ItemStack amongUs(ProcessingInventory instance, int i, Operation<ItemStack> original) {
+        var outputStack = original.call(instance, i);
         if (outputStack.isEmpty()) return ItemStack.EMPTY;
 
         onItemCrush(outputStack);
