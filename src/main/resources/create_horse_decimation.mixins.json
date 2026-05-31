@@ -6,7 +6,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "CrushingWheelControllerBlockEntityMixin",
-    "DetectHorseBlockDestroyMixin"
+    "DetectHorseBlockDestroyMixin",
+    "MechanicalPressBlockEntityMixin"
   ],
   "client": [
     "AnotherGoofyAhhMixinThatSpecificallyCensorsTheWordHorse",
