@@ -62,7 +62,15 @@ public abstract class CrushingWheelControllerBlockEntityMixin {
         if (!(level instanceof ServerLevel serverLevel)) return;
 
         create_horse_decimation$isItemCrushingDebounced = true;
-        serverLevel.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.HORSE_DEATH, SoundSource.BLOCKS, 1.0f, 1.0f);
+        serverLevel.playSound(
+                null,
+                pos.getX(),
+                pos.getY(),
+                pos.getZ(),
+                SoundEvents.HORSE_DEATH,
+                SoundSource.BLOCKS,
+                1.0f,
+                1.0f);
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
