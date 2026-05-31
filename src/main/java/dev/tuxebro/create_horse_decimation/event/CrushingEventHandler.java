@@ -3,6 +3,7 @@ package dev.tuxebro.create_horse_decimation.event;
 import com.simibubi.create.AllDamageTypes;
 import dev.tuxebro.create_horse_decimation.CreateHorseDecimation;
 import dev.tuxebro.create_horse_decimation.ModItems;
+import dev.tuxebro.create_horse_decimation.config.Config;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -62,6 +63,7 @@ public class CrushingEventHandler {
     }
 
     public static void yeetAndSmiteNearestPlayers(Vec3 pos, Level level) {
+        if (Config.server.survivalFriendlyEnabled.get()) return;
         var area = new AABB(BlockPos.containing(pos)).inflate(20);
 
         List<Player> search = level.getEntitiesOfClass(Player.class, area);
