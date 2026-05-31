@@ -1,0 +1,37 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "create_horse_decimation:horse_jpg"
+    },
+    {
+      "item": "create_horse_decimation:horse_jpg"
+    },
+    {
+      "item": "create_horse_decimation:horse_jpg"
+    },
+    {
+      "item": "create_horse_decimation:horse_jpg"
+    },
+    {
+      "item": "create_horse_decimation:horse_jpg"
+    },
+    {
+      "item": "create_horse_decimation:horse_jpg"
+    },
+    {
+      "item": "create_horse_decimation:horse_jpg"
+    },
+    {
+      "item": "create_horse_decimation:horse_jpg"
+    },
+    {
+      "item": "create_horse_decimation:horse_jpg"
+    }
+  ],
+  "results": [
+    {
+      "id": "create_horse_decimation:horse_block"
+    }
+  ]
+}
