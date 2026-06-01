@@ -13,7 +13,6 @@ import net.createmod.ponder.api.element.EntityElement;
 import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
 import net.createmod.ponder.api.scene.SceneBuilder;
 import net.createmod.ponder.api.scene.SceneBuildingUtil;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
@@ -31,10 +30,10 @@ public class ModPonders {
         PonderSceneRegistrationHelper<ItemProviderEntry<?,?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
 
         HELPER.addStoryBoard(AllBlocks.CRUSHING_WHEEL, "crushing_horses", ModPonders::crushingHorses);
-        HELPER.addStoryBoard(ModBlocks.HORSE_ABDUCTOR_BLOCK, "abducting_horses", ModPonders::horseAbducting);
+        HELPER.addStoryBoard(ModBlocks.HORSE_ABDUCTOR_BLOCK, "abducting_horses", ModPonders::abductingHorses);
     }
 
-    public static void horseAbducting(SceneBuilder builder, SceneBuildingUtil util) {
+    public static void abductingHorses(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
         scene.title("abducting_horses", "Abducting Horses");
 

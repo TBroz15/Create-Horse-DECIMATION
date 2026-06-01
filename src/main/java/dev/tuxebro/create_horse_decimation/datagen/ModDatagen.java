@@ -1,10 +1,16 @@
 package dev.tuxebro.create_horse_decimation.datagen;
 
+import com.simibubi.create.Create;
+import com.simibubi.create.foundation.ponder.CreatePonderPlugin;
+import com.simibubi.create.infrastructure.data.TagLangGenerator;
+import com.tterrag.registrate.providers.ProviderType;
 import dev.tuxebro.create_horse_decimation.CreateHorseDecimation;
 import dev.tuxebro.create_horse_decimation.datagen.recipe.ModCompactingRecipeGen;
 import dev.tuxebro.create_horse_decimation.datagen.recipe.ModMechanicalCraftingRecipeGen;
 import dev.tuxebro.create_horse_decimation.datagen.recipe.ModMixingRecipeGen;
 import dev.tuxebro.create_horse_decimation.datagen.recipe.ModRecipeProvider;
+import dev.tuxebro.create_horse_decimation.ponders.ModPonderPlugin;
+import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -16,8 +22,8 @@ import java.util.function.BiConsumer;
 
 public class ModDatagen {
     public static void gatherDataHighPriority(GatherDataEvent event) {
-//        if (event.getMods().contains(CreateHorseDecimation.MOD_ID))
-//            addExtraRegistrateData();
+        if (event.getMods().contains(CreateHorseDecimation.MOD_ID))
+            addExtraRegistrateData();
     }
 
     public static void gatherData(GatherDataEvent event) {
@@ -42,9 +48,18 @@ public class ModDatagen {
 
     }
 
-//    private static void addExtraRegistrateData() {
-//        CreateHorseDecimation.registrate().addDataGenerator(ProviderType.LANG, provider -> {
-//            BiConsumer<String, String> langConsumer = provider::add;
-//        });
-//    }
+    private static void addExtraRegistrateData() {
+        CreateHorseDecimation.registrate().addDataGenerator(ProviderType.LANG, provider -> {
+            BiConsumer<String, String> langConsumer = provider::add;
+
+            providePonderLang(langConsumer);
+        });
+    }
+
+    private static void providePonderLang(BiConsumer<String, String> consumer) {
+        // Register this since FMLClientSetupEvent does not run during datagen
+        PonderIndex.addPlugin(new ModPonderPlugin());
+
+        PonderIndex.getLangAccess().provideLang(CreateHorseDecimation.MOD_ID, consumer);
+    }
 }

@@ -28,11 +28,6 @@ public class ModPonderPlugin implements PonderPlugin {
     }
 
     @Override
-    public void onPonderLevelRestore(PonderLevel ponderLevel) {
-//        PonderPlugin.super.onPonderLevelRestore(ponderLevel);
-    }
-
-    @Override
     public void indexExclusions(IndexExclusionHelper helper) {
 //        PonderPlugin.super.indexExclusions(helper);
     }
