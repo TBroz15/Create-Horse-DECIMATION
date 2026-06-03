@@ -1,6 +1,7 @@
 {
   "block.create_horse_decimation.horse_abductor": "Horse Abductor 9000",
   "block.create_horse_decimation.horse_block": "Horse Block",
+  "block.create_horse_decimation.horse_door": "Horse Door",
   "block.create_horse_decimation.horse_glue": "Horse Glue",
   "create_horse_decimation.ponder.abducting_horses.header": "Abducting Horses",
   "create_horse_decimation.ponder.abducting_horses.text_1": "This is a herd of evil and intimidating Horses.",

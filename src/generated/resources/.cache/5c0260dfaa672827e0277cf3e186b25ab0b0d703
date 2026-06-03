@@ -1,23 +1,31 @@
-// 1.21.1	2026-06-01T21:32:18.207108	Registrate Provider for create_horse_decimation [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+// 1.21.1	2026-06-03T22:47:10.400248	Registrate Provider for create_horse_decimation [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
 8da6336d161252190baa8ed99cbee86f895fc462 assets/create_horse_decimation/blockstates/horse_abductor.json
 f75e5d280ee190d80338b8444d8716d761da4e16 assets/create_horse_decimation/blockstates/horse_block.json
+196f0e69f76ad22712fd2a7faed1435065f6711f assets/create_horse_decimation/blockstates/horse_door.json
 e99b16a01c2bc50ab9f97b3623d15bff69d7f440 assets/create_horse_decimation/blockstates/horse_glue.json
-b074e405e9010bad9750197fd0703d99aa803981 assets/create_horse_decimation/lang/en_ud.json
-cc734affc36876b2fd07192c4e861597114e04e1 assets/create_horse_decimation/lang/en_us.json
+ec99628a7a516da1be049c3664af5f6b5ebcaaf9 assets/create_horse_decimation/lang/en_ud.json
+a48ad3c99943a61469ed2a9756dada784c68c4a5 assets/create_horse_decimation/lang/en_us.json
 2dcb68271b5d4d18eb3c6e0ddd0897218459321c assets/create_horse_decimation/models/block/horse_glue.json
 0e21bd7da4555f3aa6205c61abe892bf50f92938 assets/create_horse_decimation/models/item/horse_abductor.json
 6846226e65cdac704425a6f44a2b5d4cab41cf00 assets/create_horse_decimation/models/item/horse_block.json
+b381b3924905252c313541be7e6f29a5c357719c assets/create_horse_decimation/models/item/horse_door.json
 028c1b517e71a23e236d41ff47eeecf6679464b2 assets/create_horse_decimation/models/item/horse_dust.json
 62048a03d54e3bbfde71a458e21fb897292a8dd1 assets/create_horse_decimation/models/item/horse_glue_ball.json
 160f9e25a1cc66e143de6e86d274d339d540860b assets/create_horse_decimation/models/item/horse_glue_bucket.json
 6347925a4ab3982bc89ff4dcd2376383855083e9 assets/create_horse_decimation/models/item/horse_jpg.json
+ead6113c2bd6c37bf865b2ad71de705b5f2ea44c data/create/tags/item/contraption_controlled.json
 d27a7c7000ff575aeb4c6e70aa4dfd5cd949960f data/create_horse_decimation/loot_table/blocks/horse_abductor.json
 ece32afafa59b6fdbac2b4a9f52bf53b3fbc4877 data/create_horse_decimation/loot_table/blocks/horse_block.json
+2f73bd103e77cf9fd5943a4e1d40c8a4ebe1ca82 data/create_horse_decimation/loot_table/blocks/horse_door.json
 96751644e392a28c873c195f2d5271d7eb1a4097 data/c/tags/block/storage_blocks.json
 ed45d9e31a5db6de2894e3a6da1d429962636015 data/c/tags/item/foods.json
 a70a7e5389aa593d4ceadb6b52c05e58439bd130 data/c/tags/item/slime_balls.json
 96751644e392a28c873c195f2d5271d7eb1a4097 data/c/tags/item/storage_blocks.json
 96751644e392a28c873c195f2d5271d7eb1a4097 data/minecraft/tags/block/beacon_base_blocks.json
+ead6113c2bd6c37bf865b2ad71de705b5f2ea44c data/minecraft/tags/block/doors.json
 6b82fb54e60dfa7860684aa77bb865fdbe72ade4 data/minecraft/tags/block/mineable/axe.json
-6b82fb54e60dfa7860684aa77bb865fdbe72ade4 data/minecraft/tags/block/mineable/pickaxe.json
+dd7e8c7e344c54a005c5d80257ac939dec3a74c3 data/minecraft/tags/block/mineable/pickaxe.json
+ead6113c2bd6c37bf865b2ad71de705b5f2ea44c data/minecraft/tags/block/wooden_doors.json
+ead6113c2bd6c37bf865b2ad71de705b5f2ea44c data/minecraft/tags/item/doors.json
 d8720596da227edcaa8e1c19d3e3ad4e985bad54 data/neoforge/data_maps/item/furnace_fuels.json
+ead6113c2bd6c37bf865b2ad71de705b5f2ea44c data/quark/tags/block/non_double_door.json

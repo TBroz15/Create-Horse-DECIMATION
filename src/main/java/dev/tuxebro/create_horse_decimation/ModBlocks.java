@@ -1,18 +1,18 @@
 package dev.tuxebro.create_horse_decimation;
 
 import com.simibubi.create.foundation.data.BlockStateGen;
+import com.simibubi.create.foundation.data.BuilderTransformers;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.tuxebro.create_horse_decimation.block.horse_abductor.HorseAbductorBlock;
 import dev.tuxebro.create_horse_decimation.block.horse_block.HorseBlock;
+import dev.tuxebro.create_horse_decimation.block.horse_door.SlidingHorseDoorBlock;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.component.ItemLore;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.common.Tags;
 
@@ -52,7 +52,11 @@ public class ModBlocks {
             .lang("Horse Block")
             .register();
 
-
+    public static final BlockEntry<SlidingHorseDoorBlock> HORSE_DOOR = REGISTRATE.block("horse_door", SlidingHorseDoorBlock::new)
+                    .properties(p -> p.mapColor(MapColor.STONE)
+                            .noOcclusion())
+                    .transform(BuilderTransformers.slidingDoor("horse"))
+                    .register();
 
     public static void register() {}
 }

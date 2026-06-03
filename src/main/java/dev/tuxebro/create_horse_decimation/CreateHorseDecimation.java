@@ -73,6 +73,7 @@ public class CreateHorseDecimation {
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
+        ModPartialModels.register();
         PonderIndex.addPlugin(new ModPonderPlugin());
     }
 
