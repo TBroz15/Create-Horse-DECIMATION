@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class HorseCensorInator9000 {
 
     private static final Pattern HORSE_PATTERN = Pattern.compile(
-            "h+o+r+s+e+|л+о+ш+а+д+ь*",
+            "h+o+r+s+e+|л+о+ш+а+д+ь*", 
             Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE
     );
 
@@ -19,7 +19,7 @@ public class HorseCensorInator9000 {
 
         if (text == null) return "";
         if (text.isEmpty()) return "";
-        if (text.length() < 5) return text;
+        if (text.length() < 5) return text; // ofc "h*rse" is not a 4 letter word (or less)
 
         if (!containsHorseLetters(text)) return text;
 
@@ -90,7 +90,7 @@ public class HorseCensorInator9000 {
     }
 
     private static boolean canCensorHorse() {
-        if (!Config.isLoaded) return false;
+        if (!Config.isLoaded) return false; // prevent it from crashing, dont remove this line fr
         return Config.client.censorHorseWord.get();
     }
 }
