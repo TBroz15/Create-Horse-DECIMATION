@@ -1,0 +1,22 @@
+{
+  "block.create_horse_decimation.horse_abductor": "Лошадиный ворователь 9000",
+  "block.create_horse_decimation.horse_block": "Лошадиный блок",
+  "block.create_horse_decimation.horse_glue": "Лошадиный клей",
+  "create_horse_decimation.ponder.abducting_horses.header": "Красть лошадей",
+  "create_horse_decimation.ponder.abducting_horses.text_1": "Это стадо злых и устрашающих лошадей.",
+  "create_horse_decimation.ponder.abducting_horses.text_2": "Чтобы активировать ворователь, требуется запитанный вентилятор в корпусе, расположенный перед вентиляционными отверстиями",
+  "create_horse_decimation.ponder.abducting_horses.text_3": "Картинка лошади",
+  "create_horse_decimation.ponder.crushing_horses.header": "Уничтожаем лошадей с помощью дробильных колёс",
+  "create_horse_decimation.ponder.crushing_horses.text_1": "Это злая и угрожающая лошадь",
+  "create_horse_decimation.ponder.crushing_horses.text_2": "Цель Create: Horse DECIMATION это...",
+  "create_horse_decimation.ponder.crushing_horses.text_3": "Ну типа как бы уничтожать злых и ужасающих лошадей?",
+  "create_horse_decimation.ponder.crushing_horses.text_4": "Дробя лошадей выпадет...",
+  "create_horse_decimation.ponder.crushing_horses.text_5": "Лошадиная пыль",
+  "create_horse_decimation.ponder.tag.horse_decimation": "Horse Decimation",
+  "create_horse_decimation.ponder.tag.horse_decimation.description": "Компоненты которые помогут уничтожать этих мерзких созданий",
+  "fluid.create_horse_decimation.horse_glue": "Лошадиная клеевая жидкость",
+  "item.create_horse_decimation.horse_dust": "Лошадиная пыль",
+  "item.create_horse_decimation.horse_glue_ball": "Шарик лошадиного клея",
+  "item.create_horse_decimation.horse_glue_bucket": "Ведро лошадиной клеевой жидкости",
+  "item.create_horse_decimation.horse_jpg": "лошадь.jpg"
+}
