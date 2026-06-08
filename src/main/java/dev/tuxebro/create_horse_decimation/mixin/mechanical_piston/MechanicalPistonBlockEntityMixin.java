@@ -4,11 +4,15 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.simibubi.create.content.contraptions.piston.MechanicalPistonBlockEntity;
 import dev.tuxebro.create_horse_decimation.interfaces.IMixinMechanicalPistonEntity;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 // TODO: remove soon when video is done
 
@@ -38,5 +42,15 @@ public class MechanicalPistonBlockEntityMixin implements IMixinMechanicalPistonE
     @WrapOperation(method = "getMovementSpeed", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(FFF)F", ordinal = 0))
     public float scaleMovementSpeed(float value, float min, float max, Operation<Float> original) {
         return original.call(value, min, max) * movementSpeedScale;
+    }
+
+    @Inject(method = "read", at = @At("HEAD"))
+    public void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket, CallbackInfo ci) {
+        movementSpeedScale = tag.getFloat("MovementSpeedScale");
+    }
+
+    @Inject(method = "write", at = @At("HEAD"))
+    public void write(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket, CallbackInfo ci) {
+        tag.putFloat("MovementSpeedScale", movementSpeedScale);
     }
 }
