@@ -8,7 +8,9 @@
     "BasinInventoryMixin",
     "CrushingWheelControllerBlockEntityMixin",
     "DetectHorseBlockDestroyMixin",
-    "MechanicalPressBlockEntityMixin"
+    "MechanicalPressBlockEntityMixin",
+    "mechanical_piston.MechanicalPistonBlockEntityMixin",
+    "mechanical_piston.MechanicalPistonMixin"
   ],
   "client": [
     "AnotherGoofyAhhMixinThatSpecificallyCensorsTheWordHorse",
