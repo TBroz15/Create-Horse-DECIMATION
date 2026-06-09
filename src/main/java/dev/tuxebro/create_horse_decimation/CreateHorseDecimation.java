@@ -45,6 +45,8 @@ public class CreateHorseDecimation {
         LOGGER.info("getting ready for decimating evil and intimidating horses >:)");
 
         modEventBus.addListener(this::clientSetup);
+        modEventBus.addListener(this::commonSetup);
+
         modEventBus.addListener(EventPriority.HIGHEST, ModDatagen::gatherDataHighPriority);
         modEventBus.addListener(EventPriority.LOWEST, ModDatagen::gatherData);
         modEventBus.addListener(RegisterCapabilitiesEvent.class, CreateHorseDecimation::registerCapabilities);
@@ -66,7 +68,6 @@ public class CreateHorseDecimation {
 
     }
 
-    @SubscribeEvent
     private void commonSetup(final FMLCommonSetupEvent event) {
         ItemBlockRenderTypes.setRenderLayer(ModFluids.HORSE_GLUE.getSource(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModFluids.HORSE_GLUE.get(), RenderType.translucent());
