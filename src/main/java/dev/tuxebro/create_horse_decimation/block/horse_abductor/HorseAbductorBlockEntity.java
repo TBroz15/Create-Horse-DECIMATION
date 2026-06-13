@@ -4,7 +4,6 @@ import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.fan.EncasedFanBlock;
-import com.simibubi.create.foundation.sound.SoundScapes;
 import dev.tuxebro.create_horse_decimation.ModBlockEntityTypes;
 import dev.tuxebro.create_horse_decimation.ModItems;
 import dev.tuxebro.create_horse_decimation.compat.ModCompat;
@@ -56,7 +55,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
     private final Set<UUID> abductingHorsesID = new HashSet<>();
     private int range = 0;
 
-    private Suckinator suckinator = createSuckinator();
+    private CachedSuckinator cachedSuckinator = recalculateSuckinator();
 
     public HorseAbductorBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
@@ -89,7 +88,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
 
             level.playSound(
                     null,
-                    suckinator.pos,
+                    cachedSuckinator.pos,
                     SoundEvents.HORSE_HURT,
                     net.minecraft.sounds.SoundSource.BLOCKS,
                     0.2F, (float) 0.75 + addedPitch
@@ -97,7 +96,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
 
             level.playSound(
                     null,
-                    suckinator.pos,
+                    cachedSuckinator.pos,
                     AllSoundEvents.FWOOMP.getMainEvent(),
                     net.minecraft.sounds.SoundSource.BLOCKS,
                     0.6F, (float) 1.5 + addedPitch
@@ -106,7 +105,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
 
         if (suckingHorsesID.isEmpty()) return;
 
-        var globalPos = ModCompat.Sable.getLevelPosFromSubLevelPos(suckinator.pos, this);
+        var globalPos = ModCompat.Sable.getLevelPosFromSubLevelPos(cachedSuckinator.pos, this);
         var globalCenter = VecHelper.getCenterOf(globalPos);
 
         for (Iterator<UUID> iterator = suckingHorsesID.iterator(); iterator.hasNext();) {
@@ -153,16 +152,16 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
         if (gameTime % Config.client.ticksPerParticle.get() == 0) {
             AbductorParticleSpawner.spawn(
                     level,
-                    suckinator.center,
-                    suckinator.direction.getOpposite(),
-                    suckinator.abductBox,
+                    cachedSuckinator.center,
+                    cachedSuckinator.direction.getOpposite(),
+                    cachedSuckinator.abductBox,
                     0.3);
 
             AbductorParticleSpawner.spawn(
                     level,
-                    suckinator.center,
-                    suckinator.direction.getOpposite(),
-                    suckinator.box,
+                    cachedSuckinator.center,
+                    cachedSuckinator.direction.getOpposite(),
+                    cachedSuckinator.suckBox,
                     getVelocityScaleByRange(range));
         }
 
@@ -191,13 +190,13 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
     }
 
     public void lazyServerTick(ServerLevel level) {
-        List<Horse> suckingHorses = level.getEntitiesOfClass(Horse.class, suckinator.box);
+        List<Horse> suckingHorses = level.getEntitiesOfClass(Horse.class, cachedSuckinator.suckBox);
         for (Horse horse : suckingHorses) {
             if (horse.isDeadOrDying()) continue;
             suckingHorsesID.add(horse.getUUID());
         }
 
-        List<Horse> abductingHorses = level.getEntitiesOfClass(Horse.class, suckinator.abductBox);
+        List<Horse> abductingHorses = level.getEntitiesOfClass(Horse.class, cachedSuckinator.abductBox);
         for (Horse horse : abductingHorses) {
             if (horse.isDeadOrDying()) continue;
             abductingHorsesID.add(horse.getUUID());
@@ -233,7 +232,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
 
     void updateRange(int range) {
         this.range = range;
-        this.suckinator = createSuckinator();
+        this.cachedSuckinator = recalculateSuckinator();
     }
 
     public int getRange() {
@@ -252,19 +251,19 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
         return true;
     }
 
-    private record Suckinator (
+    private record CachedSuckinator(
         Direction direction,
         BlockPos pos,
         Vec3 center,
 
         int width,
-        AABB box,
+        AABB suckBox,
 
         int abductWidth,
         AABB abductBox
     ) {}
 
-    private Suckinator createSuckinator() {
+    private CachedSuckinator recalculateSuckinator() {
         var direction = getBlockState().getValue(EncasedFanBlock.FACING);
         var pos = getBlockPos().relative(direction);
         var center = VecHelper.getCenterOf(pos);
@@ -288,7 +287,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
                         direction.getAxis() == Direction.Axis.Y ? 0 : abductWidth,
                         direction.getAxis() == Direction.Axis.Z ? 0 : abductWidth);
 
-        return new Suckinator(
+        return new CachedSuckinator(
                 direction, pos, center,
                 suckWidth, suckBox,
                 abductWidth, abductBox
