@@ -4,6 +4,7 @@ import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.fan.EncasedFanBlock;
+import com.simibubi.create.foundation.sound.SoundScapes;
 import dev.tuxebro.create_horse_decimation.ModBlockEntityTypes;
 import dev.tuxebro.create_horse_decimation.ModItems;
 import dev.tuxebro.create_horse_decimation.compat.ModCompat;
@@ -19,6 +20,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
@@ -158,6 +160,12 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
                 suckinator.direction.getOpposite(),
                 suckinator.box,
                 getVelocityScaleByRange(range));
+
+        var gameTime = level.getGameTime();
+        if (gameTime % 15 == 0)
+            level.playLocalSound(getBlockPos(), SoundEvents.BEACON_ACTIVATE, SoundSource.BLOCKS, 0.25f, 0.5f, false);
+        if (gameTime % 5 == 0)
+            level.playLocalSound(getBlockPos(), SoundEvents.WITHER_SHOOT, SoundSource.BLOCKS, 0.02f, 0.5f, false);
     }
 
     public float getVelocityScaleByRange(int range) {
