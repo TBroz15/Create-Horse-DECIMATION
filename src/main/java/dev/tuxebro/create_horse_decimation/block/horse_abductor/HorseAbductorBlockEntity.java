@@ -8,6 +8,7 @@ import com.simibubi.create.foundation.sound.SoundScapes;
 import dev.tuxebro.create_horse_decimation.ModBlockEntityTypes;
 import dev.tuxebro.create_horse_decimation.ModItems;
 import dev.tuxebro.create_horse_decimation.compat.ModCompat;
+import dev.tuxebro.create_horse_decimation.config.Config;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -147,21 +148,25 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
 
     @OnlyIn(Dist.CLIENT)
     public void clientTick(Level level) {
-        AbductorParticleSpawner.spawn(
-                level,
-                suckinator.center,
-                suckinator.direction.getOpposite(),
-                suckinator.abductBox,
-                0.3);
-
-        AbductorParticleSpawner.spawn(
-                level,
-                suckinator.center,
-                suckinator.direction.getOpposite(),
-                suckinator.box,
-                getVelocityScaleByRange(range));
-
         var gameTime = level.getGameTime();
+
+        if (gameTime % Config.client.ticksPerParticle.get() == 0) {
+            AbductorParticleSpawner.spawn(
+                    level,
+                    suckinator.center,
+                    suckinator.direction.getOpposite(),
+                    suckinator.abductBox,
+                    0.3);
+
+            AbductorParticleSpawner.spawn(
+                    level,
+                    suckinator.center,
+                    suckinator.direction.getOpposite(),
+                    suckinator.box,
+                    getVelocityScaleByRange(range));
+        }
+
+        if (!Config.client.ambientSounds.get()) return;
         if (gameTime % 15 == 0)
             level.playLocalSound(getBlockPos(), SoundEvents.BEACON_ACTIVATE, SoundSource.BLOCKS, 0.25f, 0.5f, false);
         if (gameTime % 5 == 0)
@@ -344,7 +349,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
             Vec3 velocity = direction.normalize().scale(velocityScale);
 
             clientLevel.addAlwaysVisibleParticle(
-                    ParticleTypes.CLOUD, true,
+                    ParticleTypes.CLOUD, Config.client.showParticlesFarAway.get(),
                     posA.x, posA.y, posA.z,
                     velocity.x, velocity.y, velocity.z
             );
