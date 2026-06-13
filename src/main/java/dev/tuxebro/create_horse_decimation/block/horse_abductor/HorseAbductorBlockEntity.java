@@ -21,6 +21,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
@@ -69,10 +70,9 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
 
             var stack = new ItemStack(ModItems.HORSE_JPG.get());
 
-            // TODO: fix saving horse data inside of horse.jpg
             CompoundTag entityTag = new CompoundTag();
             horse.saveWithoutId(entityTag);
-            String entityTypeId = BuiltInRegistries.ENTITY_TYPE.getKey(horse.getType()).toString();
+            String entityTypeId = BuiltInRegistries.ENTITY_TYPE.getKey(EntityType.HORSE).toString();
             entityTag.putString("id", entityTypeId);
             CustomData customData = CustomData.of(entityTag);
             stack.set(DataComponents.ENTITY_DATA, customData);
