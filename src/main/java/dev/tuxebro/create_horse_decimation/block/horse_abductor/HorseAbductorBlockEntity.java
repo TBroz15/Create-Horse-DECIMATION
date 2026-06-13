@@ -7,6 +7,7 @@ import com.simibubi.create.content.kinetics.fan.EncasedFanBlock;
 import dev.tuxebro.create_horse_decimation.ModBlockEntityTypes;
 import dev.tuxebro.create_horse_decimation.ModItems;
 import dev.tuxebro.create_horse_decimation.compat.ModCompat;
+import dev.tuxebro.create_horse_decimation.compat.sable.PossibleSableSublevelCompat;
 import dev.tuxebro.create_horse_decimation.config.Config;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -46,7 +47,6 @@ import java.util.concurrent.ThreadLocalRandom;
 // https://c.tenor.com/f2Wn5IYjODIAAAAd/tenor.gif
 public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHaveGoggleInformation {
     private final HorseAbductorInventoryHandler inventory = new HorseAbductorInventoryHandler(27, ()->{
-        this.setChanged();
         if (level == null) return;
         level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
     });
@@ -105,10 +105,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
 
         if (suckingHorsesID.isEmpty()) return;
 
-        var globalPos = cachedSuckinator.isInsideOfSubLevel ?
-                ModCompat.Sable.getLevelPosFromSubLevelPos(cachedSuckinator.pos, this) :
-                cachedSuckinator.pos;
-        var globalCenter = VecHelper.getCenterOf(globalPos);
+        var globalPos = cachedSuckinator.sublevel.getGlobalLevelPos(cachedSuckinator.center);
 
         for (Iterator<UUID> iterator = suckingHorsesID.iterator(); iterator.hasNext();) {
             UUID horseID = iterator.next();
@@ -116,7 +113,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
             var horse = level.getEntity(horseID);
             if (horse == null) continue;
 
-            Vec3 diff = horse.position().subtract(globalCenter);
+            Vec3 diff = horse.position().subtract(globalPos);
             double horseDistance = diff.length();
 
             if (horseDistance > range) {
@@ -257,7 +254,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
         Direction direction,
         BlockPos pos,
         Vec3 center,
-        boolean isInsideOfSubLevel,
+        PossibleSableSublevelCompat sublevel,
 
         int width,
         AABB suckBox,
@@ -270,7 +267,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
         var direction = getBlockState().getValue(EncasedFanBlock.FACING);
         var pos = getBlockPos().relative(direction);
         var center = VecHelper.getCenterOf(pos);
-        var isInsideOfSubLevel = ModCompat.Sable.isBlockEntityInSubLevel(this);
+        var sublevel = ModCompat.createSableSublevelCompat(this);
 
         Vec3 directionVec = Vec3.atLowerCornerOf(direction.getNormal());
         Vec3 expansionVec = directionVec.scale(range);
@@ -292,7 +289,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
                         direction.getAxis() == Direction.Axis.Z ? 0 : abductWidth);
 
         return new CachedSuckinator(
-                direction, pos, center, isInsideOfSubLevel,
+                direction, pos, center, sublevel,
                 suckWidth, suckBox,
                 abductWidth, abductBox
         );
