@@ -1,6 +1,5 @@
 package dev.tuxebro.create_horse_decimation;
 
-import com.simibubi.create.AllCreativeModeTabs;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.tuxebro.create_horse_decimation.item.HorseDustItem;
@@ -12,7 +11,7 @@ public class ModItems {
     private static final CreateRegistrate REGISTRATE = CreateHorseDecimation.registrate();
 
     static {
-        REGISTRATE.setCreativeTab(AllCreativeModeTabs.BASE_CREATIVE_TAB);
+        REGISTRATE.setCreativeTab(ModCreativeModeTabs.MAIN_TAB);
     }
 
     public static final ItemEntry<HorseDustItem> HORSE_DUST = REGISTRATE.item("horse_dust", HorseDustItem::new)

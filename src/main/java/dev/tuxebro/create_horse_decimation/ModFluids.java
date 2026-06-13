@@ -1,13 +1,11 @@
 package dev.tuxebro.create_horse_decimation;
 
-import com.simibubi.create.AllCreativeModeTabs;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import dev.tuxebro.create_horse_decimation.block.horse_glue_fluid.HorseGlueFluidBlock;
 import net.createmod.catnip.theme.Color;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.dispenser.BlockSource;
@@ -36,7 +34,7 @@ public class ModFluids {
     private static final CreateRegistrate REGISTRATE = CreateHorseDecimation.registrate();
 
     static {
-        REGISTRATE.setCreativeTab(AllCreativeModeTabs.BASE_CREATIVE_TAB);
+        REGISTRATE.setCreativeTab(ModCreativeModeTabs.MAIN_TAB);
     }
 
     public static final FluidEntry<BaseFlowingFluid.Flowing> HORSE_GLUE = REGISTRATE.standardFluid("horse_glue",
