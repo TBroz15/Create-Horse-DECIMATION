@@ -50,7 +50,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
     private final HorseAbductorInventoryHandler inventory = new HorseAbductorInventoryHandler(27, ()->{
         this.setChanged();
         if (level == null) return;
-//        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
     });
 
     private final Set<UUID> suckingHorsesID   = new HashSet<>();
