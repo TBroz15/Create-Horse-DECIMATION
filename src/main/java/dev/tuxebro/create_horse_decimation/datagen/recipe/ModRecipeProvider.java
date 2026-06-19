@@ -28,6 +28,7 @@ public final class ModRecipeProvider extends RecipeProvider {
         GENERATORS.add(new ModCrushingRecipeGen(output, registries));
         GENERATORS.add(new ModCompactingRecipeGen(output, registries));
         GENERATORS.add(new ModMixingRecipeGen(output, registries));
+        GENERATORS.add(new ModCuttingRecipeGen(output, registries));
 
         gen.addProvider(true, new DataProvider() {
 

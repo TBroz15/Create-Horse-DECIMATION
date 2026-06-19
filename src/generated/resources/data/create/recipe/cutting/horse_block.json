@@ -1,0 +1,14 @@
+{
+  "type": "create:cutting",
+  "ingredients": [
+    {
+      "item": "create_horse_decimation:horse_block"
+    }
+  ],
+  "processing_time": 100,
+  "results": [
+    {
+      "id": "create_horse_decimation:horse_door"
+    }
+  ]
+}

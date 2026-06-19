@@ -1,6 +1,8 @@
-// 1.21.1	2026-06-03T22:47:10.3992505	Create: Horse DECIMATION's Processing Recipes
-67b300ae461e3614d70154d42677fccdeabe169a data/create/recipe/crushing/horse_block.json
+// 1.21.1	2026-06-19T21:23:10.4889891	Create: Horse DECIMATION's Processing Recipes
+ad3ec77f9b56fa815bab6a451cfebbff05d1168c data/create/recipe/crushing/horse_block.json
+0c1c2ad24d0c175f2ff936e00896645576ca53ae data/create/recipe/crushing/horse_door.json
 1070fb8f7532cf7d8044a222f88ce97cce0c7365 data/create/recipe/crushing/horse_jpg.json
+63995ff0007b4460a919575180d916abfd496afa data/create/recipe/cutting/horse_block.json
 e8df5ca5f1aae8b57801fdd5dae889625b17a442 data/create_horse_decimation/recipe/compacting/horse_block.json
 44fe00f8bea69606ccc56418d3d2f1a0e6e2d6ae data/create_horse_decimation/recipe/compacting/horse_glue_ball.json
 d2c873f316c69dacb108fe611458b43f7488ecec data/create_horse_decimation/recipe/mixing/horse_glue_fluid.json

@@ -21,8 +21,15 @@ public class ModCrushingRecipeGen extends CrushingRecipeGen {
     GeneratedRecipe HORSE_BLOCK = create(() -> ModBlocks.HORSE_BLOCK, builder -> builder
             .duration(260)
             .output(ModItems.HORSE_DUST, 10)
-            .output(AllBlocks.EXPERIENCE_BLOCK, 1)
+            .output(.50f, AllBlocks.EXPERIENCE_BLOCK, 1)
             .output(.50f, ModItems.HORSE_DUST, 3 ));
+
+    GeneratedRecipe HORSE_DOOR = create(() -> ModBlocks.HORSE_DOOR, builder -> builder
+            .duration(260)
+            .output(ModItems.HORSE_DUST, 11)
+            .output(AllBlocks.EXPERIENCE_BLOCK, 1)
+            .output(.50f, ModItems.HORSE_DUST, 4 ));
+
 
     public ModCrushingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, CreateHorseDecimation.MOD_ID);
