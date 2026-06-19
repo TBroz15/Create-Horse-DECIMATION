@@ -212,13 +212,12 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
 
         suckingHorsesID.clear();
         abductingHorsesID.clear();
+        inventory.checkOnChange();
 
         if (!isValidToTick()) return;
 
         if (level instanceof ServerLevel serverLevel)
             lazyServerTick(serverLevel);
-
-        inventory.checkOnChange();
 
 //        if (level instanceof ClientLevel clientLevel)
 //            lazyClientTick(clientLevel);
