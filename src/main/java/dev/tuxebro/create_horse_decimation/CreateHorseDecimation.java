@@ -69,13 +69,13 @@ public class CreateHorseDecimation {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.HORSE_GLUE.getSource(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.HORSE_GLUE.get(), RenderType.translucent());
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
         ModPartialModels.register();
         PonderIndex.addPlugin(new ModPonderPlugin());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.HORSE_GLUE.getSource(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.HORSE_GLUE.get(), RenderType.translucent());
     }
 
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
