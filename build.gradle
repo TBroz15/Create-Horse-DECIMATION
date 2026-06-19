@@ -55,7 +55,7 @@ neoForge {
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
-        client2 {
+        clientUsernameTest {
             client()
             programArgument '--username=TuxeBro'
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
@@ -64,6 +64,8 @@ neoForge {
         server {
             server()
             programArgument '--nogui'
+            gameDirectory = file("run_server")
+            gameDirectory.asFile.get().mkdirs()
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
