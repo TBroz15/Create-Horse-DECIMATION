@@ -32,6 +32,7 @@ import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -53,7 +54,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
     private final HorseAbductorInventoryHandler inventory = new HorseAbductorInventoryHandler(MAX_HORSE_SLOTS, ()->{
         this.setChanged();
         if (level == null) return;
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
     });
 
     private final Set<UUID> suckingHorsesID   = new HashSet<>();

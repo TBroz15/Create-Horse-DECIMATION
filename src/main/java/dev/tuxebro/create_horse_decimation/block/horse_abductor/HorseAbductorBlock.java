@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.PushReaction;
 import org.jetbrains.annotations.Nullable;
 
 public class HorseAbductorBlock extends DirectionalAxisKineticBlock implements IBE<HorseAbductorBlockEntity> {
@@ -25,7 +24,7 @@ public class HorseAbductorBlock extends DirectionalAxisKineticBlock implements I
         super(properties);
     }
 
-    private void updateFanBlocks(BlockState state, Level level, BlockPos pos) {
+    private void updateAbductorBlockEntity(BlockState state, Level level, BlockPos pos) {
         if (level == null) return;
         if (level.isClientSide) return;
 
@@ -45,7 +44,7 @@ public class HorseAbductorBlock extends DirectionalAxisKineticBlock implements I
         if (!(level.getBlockEntity(pos) instanceof HorseAbductorBlockEntity fanBlockEntity)) return;
 
         fanBlockEntity.updateRange(range);
-        level.sendBlockUpdated(pos, state, state, 3); // client update
+        level.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL); // client update
     }
 
     private int getRangeFromFan(@Nullable EncasedFanBlockEntity ...fans) {
@@ -78,6 +77,17 @@ public class HorseAbductorBlock extends DirectionalAxisKineticBlock implements I
         return topVentFan;
     }
 
+    // confusing way to detect if abductor moved to sable's sublevel, rewrite if there is better solution
+    @Override
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
+        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+
+        if (level.isClientSide) return;
+        if (Blocks.AIR != neighborBlock) return;
+
+        updateAbductorBlockEntity(state, level, pos);
+    }
+
     @Override
     public void onNeighborChange(BlockState state, LevelReader levelReader, BlockPos pos, BlockPos neighborPos) {
         super.onNeighborChange(state, levelReader, pos, neighborPos);
@@ -90,7 +100,7 @@ public class HorseAbductorBlock extends DirectionalAxisKineticBlock implements I
                 || level.getBlockState(neighborPos).is(Blocks.AIR); // for when breaking fans
         if (!isValidToUpdate) return;
 
-        updateFanBlocks(state, level, pos);
+        updateAbductorBlockEntity(state, level, pos);
     }
 
     @Override
@@ -99,7 +109,7 @@ public class HorseAbductorBlock extends DirectionalAxisKineticBlock implements I
 
         if (level.isClientSide) return;
 
-        updateFanBlocks(state, level, pos);
+        updateAbductorBlockEntity(state, level, pos);
     }
 
     @Override
