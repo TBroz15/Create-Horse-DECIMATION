@@ -2,15 +2,16 @@ package dev.tuxebro.create_horse_decimation.block.horse_abductor;
 
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
-import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import com.simibubi.create.content.kinetics.fan.EncasedFanBlock;
 import dev.tuxebro.create_horse_decimation.ModBlockEntityTypes;
 import dev.tuxebro.create_horse_decimation.ModItems;
+import dev.tuxebro.create_horse_decimation.ModLang;
 import dev.tuxebro.create_horse_decimation.compat.ModCompat;
 import dev.tuxebro.create_horse_decimation.compat.sable.PossibleSableSublevelCompat;
 import dev.tuxebro.create_horse_decimation.config.Config;
+import joptsimple.internal.Strings;
 import net.createmod.catnip.math.VecHelper;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,6 +21,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -47,7 +49,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 // https://c.tenor.com/f2Wn5IYjODIAAAAd/tenor.gif
 public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHaveGoggleInformation {
-    private final HorseAbductorInventoryHandler inventory = new HorseAbductorInventoryHandler(27, ()->{
+    private static final int MAX_HORSE_SLOTS = 27;
+    private final HorseAbductorInventoryHandler inventory = new HorseAbductorInventoryHandler(MAX_HORSE_SLOTS, ()->{
         this.setChanged();
         if (level == null) return;
         level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
@@ -84,7 +87,6 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
             horse.discard();
 
             ItemHandlerHelper.insertItem(inventory, stack, false);
-            inventory.checkOnChange();
 
             var addedPitch = (float) (ThreadLocalRandom.current().nextInt(11) * 0.05);
 
@@ -216,6 +218,8 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
         if (level instanceof ServerLevel serverLevel)
             lazyServerTick(serverLevel);
 
+        inventory.checkOnChange();
+
 //        if (level instanceof ClientLevel clientLevel)
 //            lazyClientTick(clientLevel);
     }
@@ -223,10 +227,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
     public boolean isValidToTick() {
         if (level == null) return false;
         if (range == 0) return false;
-        if (inventory.isFull()) {
-            inventory.checkOnChange();
-            return false;
-        };
+        if (inventory.isFull()) return false;
 
         return true;
     }
@@ -244,14 +245,61 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
         return this.range;
     }
 
+    private MutableComponent horseProgressBar(int horseCount) {
+        var component = Component.literal("");
+
+        int emptyBarsCount = MAX_HORSE_SLOTS - horseCount;
+
+        int greenBarsCount = Math.clamp(horseCount, 0, 9);
+        int yellowBarsCount = Math.clamp(horseCount -= 9, 0, 9);
+        int redBarsCount = Math.clamp(horseCount -= 9, 0, 9);
+
+        component.append(Component.literal(Strings.repeat('|', greenBarsCount)).withStyle(ChatFormatting.GREEN));
+        component.append(Component.literal(Strings.repeat('|', yellowBarsCount)).withStyle(ChatFormatting.YELLOW));
+        component.append(Component.literal(Strings.repeat('|', redBarsCount)).withStyle(ChatFormatting.RED));
+
+        component.append(Component.literal(Strings.repeat('|', emptyBarsCount)).withStyle(ChatFormatting.DARK_GRAY));
+
+        return component;
+    }
+
+    private MutableComponent rangeProgressBar(int range) {
+        final int MAX_RANGE = 45;
+        int emptyBarsCount = MAX_RANGE - range;
+        var component = Component.literal(Strings.repeat('|', range)).withStyle(ChatFormatting.GRAY);
+        component.append(Component.literal(Strings.repeat('|', emptyBarsCount)).withStyle(ChatFormatting.DARK_GRAY));
+
+        return component;
+    }
+
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         super.addToGoggleTooltip(tooltip, isPlayerSneaking);
 
         inventory.recalcSlots();
+        var horseCount = this.inventory.getOccupiedSlots();
 
-        tooltip.add(Component.literal("    Horses: ").append(Component.literal(""+inventory.getOccupiedSlots())));
-        tooltip.add(Component.literal("    Range: "+ getRange() +" "));
+        var horseComponent = Component.literal("  \uD83D\uDC0E ")
+                .append(horseCount + " ")
+                .append(horseProgressBar(horseCount))
+                .withStyle(ChatFormatting.AQUA);
+
+        var rangeComponent = Component.literal("  \uD83D\uDCCF ")
+                .append(this.range + " ")
+                .append(rangeProgressBar(range))
+                .withStyle(ChatFormatting.AQUA);
+
+        MutableComponent[] components = {
+                Component.literal("Horse Abductor 9000 Stats:"),
+                Component.literal("Horses:").withStyle(ChatFormatting.GRAY),
+                horseComponent,
+                Component.literal("Range:").withStyle(ChatFormatting.GRAY),
+                rangeComponent
+        };
+
+        for (MutableComponent component : components) {
+            ModLang.builder().add(component).forGoggles(tooltip);
+        }
 
         return true;
     }

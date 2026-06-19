@@ -11,6 +11,7 @@ import dev.tuxebro.create_horse_decimation.config.ScreenManager;
 import dev.tuxebro.create_horse_decimation.datagen.ModDatagen;
 import dev.tuxebro.create_horse_decimation.ponders.ModPonderPlugin;
 import net.createmod.catnip.lang.FontHelper;
+import net.createmod.catnip.lang.LangBuilder;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
