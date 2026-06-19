@@ -2,6 +2,7 @@ package dev.tuxebro.create_horse_decimation.block.horse_abductor;
 
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.fan.EncasedFanBlock;
 import dev.tuxebro.create_horse_decimation.ModBlockEntityTypes;
@@ -47,8 +48,9 @@ import java.util.concurrent.ThreadLocalRandom;
 // https://c.tenor.com/f2Wn5IYjODIAAAAd/tenor.gif
 public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHaveGoggleInformation {
     private final HorseAbductorInventoryHandler inventory = new HorseAbductorInventoryHandler(27, ()->{
+        this.setChanged();
         if (level == null) return;
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+//        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
     });
 
     private final Set<UUID> suckingHorsesID   = new HashSet<>();
@@ -230,6 +232,10 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
     }
 
     void updateRange(int range) {
+        boolean needsToBeRecalculated =
+                this.range != range || this.cachedSuckinator.blockPos != getBlockPos();
+        if (!needsToBeRecalculated) return;
+
         this.range = range;
         this.cachedSuckinator = recalculateSuckinator();
     }
@@ -251,6 +257,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
     }
 
     private record CachedSuckinator(
+        BlockPos blockPos,
         Direction direction,
         BlockPos pos,
         Vec3 center,
@@ -264,8 +271,9 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
     ) {}
 
     private CachedSuckinator recalculateSuckinator() {
-        var direction = getBlockState().getValue(EncasedFanBlock.FACING);
-        var pos = getBlockPos().relative(direction);
+        var blockPos = getBlockPos();
+        var direction = getBlockState().getValue(HorseAbductorBlock.FACING);
+        var pos = blockPos.relative(direction);
         var center = VecHelper.getCenterOf(pos);
         var sublevel = ModCompat.createSableSublevelCompat(this);
 
@@ -289,7 +297,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
                         direction.getAxis() == Direction.Axis.Z ? 0 : abductWidth);
 
         return new CachedSuckinator(
-                direction, pos, center, sublevel,
+                blockPos, direction, pos, center, sublevel,
                 suckWidth, suckBox,
                 abductWidth, abductBox
         );

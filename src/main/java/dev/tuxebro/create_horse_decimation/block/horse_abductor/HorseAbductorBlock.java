@@ -1,5 +1,6 @@
 package dev.tuxebro.create_horse_decimation.block.horse_abductor;
 
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.kinetics.base.DirectionalAxisKineticBlock;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.fan.EncasedFanBlock;
@@ -12,6 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -77,20 +79,16 @@ public class HorseAbductorBlock extends DirectionalAxisKineticBlock implements I
     }
 
     @Override
-    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean isMoving) {
-        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, isMoving);
-
-        if (level.isClientSide) return;
-
-        updateFanBlocks(state, level, pos);
-    }
-
-    @Override
-    public void onNeighborChange(BlockState state, LevelReader levelReader, BlockPos pos, BlockPos neighbor) {
-        super.onNeighborChange(state, levelReader, pos, neighbor);
+    public void onNeighborChange(BlockState state, LevelReader levelReader, BlockPos pos, BlockPos neighborPos) {
+        super.onNeighborChange(state, levelReader, pos, neighborPos);
 
         if (!(levelReader instanceof Level level)) return;
         if (level.isClientSide) return;
+
+        boolean isValidToUpdate =
+                level.getBlockState(neighborPos).is(AllBlocks.ENCASED_FAN)
+                || level.getBlockState(neighborPos).is(Blocks.AIR); // for when breaking fans
+        if (!isValidToUpdate) return;
 
         updateFanBlocks(state, level, pos);
     }
