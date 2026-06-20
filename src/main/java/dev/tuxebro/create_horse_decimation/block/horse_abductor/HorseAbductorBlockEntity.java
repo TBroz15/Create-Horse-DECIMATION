@@ -282,7 +282,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
         var horseComponent = Component.literal("  \uD83D\uDC0E ")
                 .append(horseCount + " ")
                 .append(horseProgressBar(horseCount))
-                .withStyle(ChatFormatting.AQUA);
+                .withStyle(horseCount >= MAX_HORSE_SLOTS ? ChatFormatting.RED : ChatFormatting.AQUA);
 
         var rangeComponent = Component.literal("  \uD83D\uDCCF ")
                 .append(this.range + " ")
