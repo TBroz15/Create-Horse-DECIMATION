@@ -9,8 +9,6 @@
     "horse_processing.CrushingWheelControllerBlockEntityMixin",
     "DetectHorseBlockDestroyMixin",
     "horse_processing.MechanicalPressBlockEntityMixin",
-    "mechanical_piston.MechanicalPistonBlockEntityMixin",
-    "mechanical_piston.MechanicalPistonMixin"
   ],
   "client": [
     "horse_word_censoring.AnotherGoofyAhhMixinThatSpecificallyCensorsTheWordHorse",
