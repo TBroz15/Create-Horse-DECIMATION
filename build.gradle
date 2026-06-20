@@ -85,6 +85,7 @@ neoForge {
             jvmArgument("-XX:+IgnoreUnrecognizedVMOptions")
             jvmArgument("-XX:+AllowEnhancedClassRedefinition")
             jvmArgument("-Xmx4G")
+            jvmArgument("-Dterminal.ansi=true")
 
             logLevel = org.slf4j.event.Level.DEBUG
         }
