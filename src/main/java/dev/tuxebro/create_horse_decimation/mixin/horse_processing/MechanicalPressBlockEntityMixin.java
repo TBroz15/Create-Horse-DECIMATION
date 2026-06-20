@@ -1,4 +1,4 @@
-package dev.tuxebro.create_horse_decimation.mixin;
+package dev.tuxebro.create_horse_decimation.mixin.horse_processing;
 
 import com.simibubi.create.content.kinetics.press.PressingBehaviour;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;

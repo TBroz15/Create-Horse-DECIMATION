@@ -5,16 +5,16 @@
   "plugin": "dev.tuxebro.create_horse_decimation.ModMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "BasinInventoryMixin",
-    "CrushingWheelControllerBlockEntityMixin",
+    "horse_processing.BasinInventoryMixin",
+    "horse_processing.CrushingWheelControllerBlockEntityMixin",
     "DetectHorseBlockDestroyMixin",
-    "MechanicalPressBlockEntityMixin",
+    "horse_processing.MechanicalPressBlockEntityMixin",
     "mechanical_piston.MechanicalPistonBlockEntityMixin",
     "mechanical_piston.MechanicalPistonMixin"
   ],
   "client": [
-    "AnotherGoofyAhhMixinThatSpecificallyCensorsTheWordHorse",
-    "GoofyAhhMixinThatSpecificallyCensorsTheWordHorse",
+    "horse_word_censoring.AnotherGoofyAhhMixinThatSpecificallyCensorsTheWordHorse",
+    "horse_word_censoring.GoofyAhhMixinThatSpecificallyCensorsTheWordHorse",
     "GreetPlayerOnBootSplashTextMixin"
   ],
   "injectors": {

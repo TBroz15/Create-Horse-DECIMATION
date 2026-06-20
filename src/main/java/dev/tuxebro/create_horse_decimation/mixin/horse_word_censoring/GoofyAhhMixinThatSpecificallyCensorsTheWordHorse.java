@@ -1,4 +1,4 @@
-package dev.tuxebro.create_horse_decimation.mixin;
+package dev.tuxebro.create_horse_decimation.mixin.horse_word_censoring;
 
 import dev.tuxebro.create_horse_decimation.utils.HorseCensorInator9000;
 import net.minecraft.network.chat.Component;

@@ -1,4 +1,4 @@
-package dev.tuxebro.create_horse_decimation.mixin;
+package dev.tuxebro.create_horse_decimation.mixin.horse_processing;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
