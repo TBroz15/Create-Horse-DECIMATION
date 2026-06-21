@@ -41,10 +41,9 @@ public class HorseAbductorBlock extends DirectionalAxisKineticBlock implements I
 
         var range = getRangeFromFan(topFan, sideFan1, sideFan2);
 
-        if (!(level.getBlockEntity(pos) instanceof HorseAbductorBlockEntity fanBlockEntity)) return;
+        if (!(level.getBlockEntity(pos) instanceof HorseAbductorBlockEntity abductorBlockEntity)) return;
 
-        fanBlockEntity.updateRange(range);
-        level.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL); // client update
+        abductorBlockEntity.updateRange(range);
     }
 
     private int getRangeFromFan(@Nullable EncasedFanBlockEntity ...fans) {

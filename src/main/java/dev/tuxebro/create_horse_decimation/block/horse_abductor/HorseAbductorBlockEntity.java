@@ -51,11 +51,7 @@ import java.util.concurrent.ThreadLocalRandom;
 // https://c.tenor.com/f2Wn5IYjODIAAAAd/tenor.gif
 public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHaveGoggleInformation {
     private static final int MAX_HORSE_SLOTS = 27;
-    private final HorseAbductorInventoryHandler inventory = new HorseAbductorInventoryHandler(MAX_HORSE_SLOTS, ()->{
-        this.setChanged();
-        if (level == null) return;
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
-    });
+    private final HorseAbductorInventoryHandler inventory = new HorseAbductorInventoryHandler(MAX_HORSE_SLOTS, this::notifyUpdate);
 
     private final Set<UUID> suckingHorsesID   = new HashSet<>();
     private final Set<UUID> abductingHorsesID = new HashSet<>();
@@ -239,6 +235,7 @@ public class HorseAbductorBlockEntity extends KineticBlockEntity implements IHav
 
         this.range = range;
         this.cachedSuckinator = recalculateSuckinator();
+        this.notifyUpdate();
     }
 
     public int getRange() {
