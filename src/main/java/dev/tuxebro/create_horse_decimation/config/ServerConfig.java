@@ -13,6 +13,11 @@ public class ServerConfig extends ConfigBase {
     public final ConfigBool horseDupe =
             b(false, "horseDupeGlitchWorkingUnpatchedWowzersDangWutDaHailOmgNoWay", Comments.horseDupe);
 
+    public final ConfigGroup crushingWheels = group(1, "crushingWheels", "Crushing Wheels");
+
+    public final ConfigInt ticksPerHorseDetection =
+            i(5,1,100, "ticksPerHorseDetection", Comments.ticksPerHorseDetection);
+
     @Override @NotNull
     public String getName() {
         return "server";
@@ -28,6 +33,10 @@ public class ServerConfig extends ConfigBase {
         private static final String[] horseDupe = {
                 "Horse Abductor will dupe horses when moved",
                 "(such as pistons, simulated contraptions, etc.)"
+        };
+
+        private static final String[] ticksPerHorseDetection = {
+                "The amount of delayed ticks to detect horses to crush.",
         };
     }
 }

@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.simibubi.create.content.kinetics.crusher.CrushingWheelControllerBlockEntity;
 import com.simibubi.create.content.processing.recipe.ProcessingInventory;
 import dev.tuxebro.create_horse_decimation.ModItems;
+import dev.tuxebro.create_horse_decimation.config.Config;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -28,11 +29,6 @@ public abstract class CrushingWheelControllerBlockEntityMixin {
     @Shadow
     public abstract boolean hasEntity();
 
-    @Shadow
-    public ProcessingInventory inventory;
-    @Unique @Final
-    private static final byte TICKS_PER_EQUINE_DETECTION = 5;
-
     @Unique
     private byte create_horse_decimation$tickTimerDetection = 0;
 
@@ -42,7 +38,6 @@ public abstract class CrushingWheelControllerBlockEntityMixin {
     // dear developers of create who made the crushing wheel, more specifically the tick method
     // PLEASE SPLIT YOUR CODE AND STOP NESTING IF STATEMENTS
     // https://media.tenor.com/zrEcHfcgTNQAAAAe/alpha-wolf-alpha.png
-
     @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/processing/recipe/ProcessingInventory;getStackInSlot(I)Lnet/minecraft/world/item/ItemStack;", ordinal = 3))
     private ItemStack onEjectOutputItem(ProcessingInventory instance, int i, Operation<ItemStack> original) {
         var outputStack = original.call(instance, i);
@@ -67,8 +62,7 @@ public abstract class CrushingWheelControllerBlockEntityMixin {
         if (create_horse_decimation$isItemCrushingDebounced) return;
         if (!outputStack.is(ModItems.HORSE_DUST)) return;
 
-        var self = (CrushingWheelControllerBlockEntity) (Object) this;
-
+        var self = getSelf();
         var pos = self.getBlockPos();
         var level = self.getLevel();
         if (!(level instanceof ServerLevel serverLevel)) return;
@@ -90,16 +84,14 @@ public abstract class CrushingWheelControllerBlockEntityMixin {
         create_horse_decimation$isItemCrushingDebounced = false;
         if (hasEntity()) return;
 
-        if (this.create_horse_decimation$tickTimerDetection <= TICKS_PER_EQUINE_DETECTION) {
+        if (this.create_horse_decimation$tickTimerDetection <= Config.server.ticksPerHorseDetection.get()) {
             this.create_horse_decimation$tickTimerDetection++;
             return;
         } else this.create_horse_decimation$tickTimerDetection = 1;
 
-        var self = (CrushingWheelControllerBlockEntity) (Object) this;
-
+        CrushingWheelControllerBlockEntity self = getSelf();
         Level level = self.getLevel();
         BlockPos blockPos = self.getBlockPos();
-
         if (level == null) return;
 
         AABB detectionBox = new AABB(blockPos).inflate(0.15);
@@ -118,5 +110,10 @@ public abstract class CrushingWheelControllerBlockEntityMixin {
         health.setBaseValue(8f);
 
         self.startCrushing(jorse);
+    }
+
+    @Unique
+    public CrushingWheelControllerBlockEntity getSelf() {
+        return (CrushingWheelControllerBlockEntity) (Object) this;
     }
 }
