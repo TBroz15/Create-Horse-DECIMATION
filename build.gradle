@@ -20,7 +20,7 @@ repositories {
         url = "https://api.modrinth.com/maven"
     }
 
-    maven { // sable
+    maven { // sable & aeronautics
         url = "https://maven.ryanhcode.dev/releases"
         name = "RyanHCode Maven"
     }
@@ -110,11 +110,16 @@ dependencies {
     runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}")
     implementation("com.tterrag.registrate:Registrate:${registrate_version}")
 
-    // Aero
-    implementation("maven.modrinth:create-aeronautics:${aeronautics_version}")
+    // Aero & Sable
+    compileOnly("dev.eriksonn.aeronautics:aeronautics-common-${minecraft_version}:${aeronautics_version}")
+    compileOnly("dev.simulated_team.simulated:simulated-common-${minecraft_version}:${aeronautics_version}")
+    compileOnly("dev.ryanhcode.offroad:offroad-common-${minecraft_version}:${aeronautics_version}")
+
+    compileOnly("dev.ryanhcode.sable-companion:sable-companion-common-${minecraft_version}:${sable_companion_version}")
+    runtimeOnly("maven.modrinth:create-aeronautics:${aeronautics_runtime_version}")
     runtimeOnly("maven.modrinth:sable:${sable_runtime_version}")
-    api("dev.ryanhcode.sable:sable-common-${project.minecraft_version}:${project.sable_version}")
-    compileOnly("dev.ryanhcode.sable-companion:sable-companion-common-${project.minecraft_version}:${project.sable_companion_version}")
+    api("dev.ryanhcode.sable:sable-common-${minecraft_version}:${sable_version}")
+    compileOnly("dev.ryanhcode.sable-companion:sable-companion-common-${minecraft_version}:${sable_companion_version}")
 
     /** Not Dependencies (if unstable, temporarily disable these mods under) **/
     // QOL
