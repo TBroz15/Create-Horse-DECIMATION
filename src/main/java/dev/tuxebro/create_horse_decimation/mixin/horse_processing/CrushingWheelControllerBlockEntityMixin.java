@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.simibubi.create.content.kinetics.crusher.CrushingWheelControllerBlockEntity;
 import com.simibubi.create.content.processing.recipe.ProcessingInventory;
+import dev.tuxebro.create_horse_decimation.CreateHorseDecimation;
 import dev.tuxebro.create_horse_decimation.ModItems;
 import dev.tuxebro.create_horse_decimation.config.Config;
 import net.minecraft.core.BlockPos;
@@ -30,7 +31,7 @@ public abstract class CrushingWheelControllerBlockEntityMixin {
     public abstract boolean hasEntity();
 
     @Unique
-    private byte create_horse_decimation$tickTimerDetection = 0;
+    private int create_horse_decimation$tickTimerDetection = 0;
 
     @Unique
     private boolean create_horse_decimation$isItemCrushingDebounced = false;
@@ -84,7 +85,8 @@ public abstract class CrushingWheelControllerBlockEntityMixin {
         create_horse_decimation$isItemCrushingDebounced = false;
         if (hasEntity()) return;
 
-        if (this.create_horse_decimation$tickTimerDetection <= Config.server.ticksPerHorseDetection.get()) {
+        int tickDelay = Config.server.ticksPerHorseDetection.get();
+        if (this.create_horse_decimation$tickTimerDetection <= tickDelay) {
             this.create_horse_decimation$tickTimerDetection++;
             return;
         } else this.create_horse_decimation$tickTimerDetection = 1;
@@ -94,18 +96,13 @@ public abstract class CrushingWheelControllerBlockEntityMixin {
         BlockPos blockPos = self.getBlockPos();
         if (level == null) return;
 
-        AABB detectionBox = new AABB(blockPos).inflate(0.15);
+        AABB detectionBox = new AABB(blockPos).inflate(0.2);
 
-        var jorse = level.getNearestEntity(
-                Horse.class,
-                TargetingConditions.DEFAULT,
-                null,
-                blockPos.getX(), blockPos.getY(), blockPos.getZ(),
-                detectionBox);
-        if (jorse == null) return;
+        var jorseList = level.getEntitiesOfClass(Horse.class, detectionBox);
+        if (jorseList.isEmpty()) return;
+        var jorse = jorseList.getFirst();
 
         var health = jorse.getAttribute(Attributes.MAX_HEALTH);
-
         if (health == null) return;
         health.setBaseValue(8f);
 
