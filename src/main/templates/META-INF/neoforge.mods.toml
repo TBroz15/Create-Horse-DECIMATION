@@ -41,3 +41,9 @@ modId="sable"
 type="optional"
 ordering="AFTER"
 side="BOTH"
+
+[[dependencies."${mod_id}"]]
+modId="simulated"
+type="optional"
+ordering="AFTER"
+side="BOTH"
