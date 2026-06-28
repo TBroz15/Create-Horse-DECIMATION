@@ -40,20 +40,23 @@ public class Config {
         return CONFIGS.get(type);
     }
 
-    @SubscribeEvent
-    public static void onLoad(ModConfigEvent.Loading event) {
-        for (ConfigBase config : CONFIGS.values())
-            if (config.specification == event.getConfig().getSpec())
-                config.onLoad();
+    public static void loadConfig(ModConfigEvent event) {
+        for (ConfigBase config : CONFIGS.values()) {
+            if (config.specification != event.getConfig().getSpec()) continue;
+            config.onLoad();
+        }
 
         isLoaded = true;
     }
 
     @SubscribeEvent
+    public static void onLoad(ModConfigEvent.Loading event) {
+        loadConfig(event);
+    }
+
+    @SubscribeEvent
     public static void onReload(ModConfigEvent.Reloading event) {
-        for (ConfigBase config : CONFIGS.values())
-            if (config.specification == event.getConfig().getSpec())
-                config.onReload();
+        loadConfig(event);
     }
 
     public static void register(ModContainer container) {

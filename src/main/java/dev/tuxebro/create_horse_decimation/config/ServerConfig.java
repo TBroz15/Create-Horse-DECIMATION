@@ -7,6 +7,9 @@ public class ServerConfig extends ConfigBase {
     public final ConfigBase.ConfigGroup server =
             group(0, "server", "Server Config");
 
+    public final ConfigInt ticksToStayPressed =
+            i(20, 1, 100, "ticksToStayPressed", Comments.ticksToStayPressed);
+
     public final ConfigBool survivalFriendlyEnabled =
             b(false, "survivalFriendlyEnabled", Comments.survivalFriendlyEnabled);
 
@@ -38,5 +41,7 @@ public class ServerConfig extends ConfigBase {
         private static final String[] ticksPerHorseDetection = {
                 "The amount of delayed ticks to detect horses to crush.",
         };
+
+        private static final String ticksToStayPressed = "ticksToStayPressed";
     }
 }

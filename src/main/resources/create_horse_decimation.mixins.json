@@ -10,7 +10,8 @@
     "horse_processing.CrushingWheelControllerBlockEntityMixin",
     "horse_processing.MechanicalPressBlockEntityMixin",
     "horse_processing.PortableEngineBlockEntityMixin",
-    "horse_processing.SawBlockEntityMixin"
+    "horse_processing.SawBlockEntityMixin",
+    "video_creating_stuff.ButtonBlockMixin"
   ],
   "client": [
     "GreetPlayerOnBootSplashTextMixin",
