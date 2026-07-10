@@ -1,6 +1,5 @@
 package dev.tuxebro.create_horse_decimation.block.horse_abductor;
 
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.kinetics.base.DirectionalAxisKineticBlock;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.fan.EncasedFanBlock;
@@ -95,7 +94,7 @@ public class HorseAbductorBlock extends DirectionalAxisKineticBlock implements I
         if (level.isClientSide) return;
 
         boolean isValidToUpdate =
-                level.getBlockState(neighborPos).is(AllBlocks.ENCASED_FAN)
+                level.getBlockState(neighborPos).getBlock() instanceof EncasedFanBlock
                 || level.getBlockState(neighborPos).is(Blocks.AIR); // for when breaking fans
         if (!isValidToUpdate) return;
 
