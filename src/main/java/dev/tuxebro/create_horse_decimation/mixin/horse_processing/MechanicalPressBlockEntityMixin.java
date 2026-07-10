@@ -28,9 +28,11 @@ public class MechanicalPressBlockEntityMixin {
         if (!(blockEntity instanceof BasinBlockEntity basin)) return;
 
         var basinInv = basin.getInputInventory();
-        var hasHorseJPG = basinInv.getItem(0).is(ModItems.HORSE_JPG);
+        if (basinInv.isEmpty()) return;
 
-        if (!hasHorseJPG) return;
+        var firstItem = basinInv.getItem(0);
+        if (firstItem.isEmpty()) return;
+        if (!firstItem.is(ModItems.HORSE_JPG)) return;
 
         if (!(level instanceof ServerLevel serverLevel)) return;
 
