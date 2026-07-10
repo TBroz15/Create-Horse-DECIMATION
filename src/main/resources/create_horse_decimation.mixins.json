@@ -5,16 +5,15 @@
   "plugin": "dev.tuxebro.create_horse_decimation.ModMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "DetectHorseBlockDestroyMixin",
+    "easter_eggs.DetectHorseBlockDestroyMixin",
     "horse_processing.BasinInventoryMixin",
     "horse_processing.CrushingWheelControllerBlockEntityMixin",
     "horse_processing.MechanicalPressBlockEntityMixin",
     "horse_processing.PortableEngineBlockEntityMixin",
-    "horse_processing.SawBlockEntityMixin",
-    "video_creating_stuff.ButtonBlockMixin"
+    "horse_processing.SawBlockEntityMixin"
   ],
   "client": [
-    "GreetPlayerOnBootSplashTextMixin",
+    "easter_eggs.GreetPlayerOnBootSplashTextMixin",
     "horse_word_censoring.AnotherGoofyAhhMixinThatSpecificallyCensorsTheWordHorse",
     "horse_word_censoring.GoofyAhhMixinThatSpecificallyCensorsTheWordHorse"
   ],

@@ -45,7 +45,7 @@ public class ModMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.equals("dev.tuxebro.create_horse_decimation.mixin.DetectHorseBlockDestroyMixin")) {
+        if (mixinClassName.equals("dev.tuxebro.create_horse_decimation.mixin.easter_eggs.DetectHorseBlockDestroyMixin")) {
             return !isSurvivalFriendlyEnabled();
         }
 

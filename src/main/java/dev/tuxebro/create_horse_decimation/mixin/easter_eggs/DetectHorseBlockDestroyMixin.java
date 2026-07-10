@@ -1,4 +1,4 @@
-package dev.tuxebro.create_horse_decimation.mixin;
+package dev.tuxebro.create_horse_decimation.mixin.easter_eggs;
 
 import dev.tuxebro.create_horse_decimation.ModBlocks;
 import com.llamalad7.mixinextras.sugar.Local;

@@ -1,4 +1,4 @@
-// 1.21.1	2026-06-03T22:47:10.400248	Registrate Provider for create_horse_decimation [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+// 1.21.1	2026-07-10T13:41:06.3388828	Registrate Provider for create_horse_decimation [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
 8da6336d161252190baa8ed99cbee86f895fc462 assets/create_horse_decimation/blockstates/horse_abductor.json
 f75e5d280ee190d80338b8444d8716d761da4e16 assets/create_horse_decimation/blockstates/horse_block.json
 196f0e69f76ad22712fd2a7faed1435065f6711f assets/create_horse_decimation/blockstates/horse_door.json
